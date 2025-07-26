@@ -1,0 +1,26 @@
+Inicialización del Robot y Motores
+El código comienza estableciendo la conexión con el robot a través de USB:
+Posteriormente, se definen los motores que controlan la cabeza del robot (motor_Cabeza) y las ruedas del mismo (motor_rueda_B y motor_rueda_C). También se inician las variables relacionadas con los sensores, como el pulsador y el sensor de distancia.
+
+ Control del Sistema de Motores
+El motor de la cabeza se activa de inmediato mediante el comando start(motor_Cabeza);, mientras que las ruedas no se activan al inicio. A través de sensores, el robot espera a que el pulsador sea presionado para comenzar la simulación.
+Bucle de Control Proporcional
+Una vez activado, el código entra en un bucle donde se realizan las siguientes acciones en cada iteración:
+
+Lectura de la rotación de la cabeza y la rueda: Se capturan los valores de rotación de los motores mediante el comando readRotation(motor_Cabeza) y readRotation(motor_rueda_B).
+
+Lectura del sensor de distancia: El sensor de distancia ultrasónico mide la distancia a objetos en el entorno, que será utilizada para la actualización del mapa.
+
+Cálculo del error: Se define una referencia basada en la rotación de la rueda (Giro_Rueda(k)) y se compara con la rotación actual de la cabeza del robot para obtener el error:
+
+
+Controlador Proporcional
+El sistema usa un controlador proporcional para ajustar la velocidad de la cabeza en función del error calculado. La ganancia del controlador está definida previamente:
+Si la potencia calculada excede los límites del motor, se ajusta al máximo permitido de -100 a 100.
+
+Visualización Gráfica
+El robot usa la función pinta_robot_v3() para actualizar su posición en un mapa basado en los datos del sensor de distancia. A su vez, las rotaciones de la cabeza, el error y la referencia se grafican para facilitar el análisis:
+Finalmente, se dibuja el mapa actualizado con los puntos detectados por el sonar:
+
+Finalización
+El código detiene el motor de la cabeza y termina la simulación una vez que el pulsador ha sido presionado nuevamente.
